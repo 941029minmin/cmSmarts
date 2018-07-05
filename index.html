@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>学生群体画像分析</title>
+		<link rel="stylesheet" href="./css/style.css" />
+		<link rel="stylesheet" href="./css/main.css" />
+		<link rel="stylesheet" href="../js/layui/css/layui.css" />
+		<style>
+			header {
+			    height: 90px;
+			    width: 96%;
+			    margin: 0 auto;
+			}
+			#ECha_4 {
+				width: 480px;
+				height: 400px;
+				margin: 0 auto;
+				margin-top: 0px;
+			}
+			#ECha_3 {
+			    width: 90%;
+			    height: 90%;
+			    margin: 0 auto;
+			    margin-top: -20px;
+			}
+			.main-right .canteen-top-list li {
+			    width: 24.9%;
+			    position: relative;
+			    border-right: 1px solid #163156;
+			}
+			.echarts-list .listone #ECha_6 {
+			    width: 100%;
+			    height: 350px;
+			}
+			#ECha_7{
+				width: 100%;
+				height: 200px;
+			}
+			#ECha_8{
+				width: 200px;
+				height: 200px;
+				margin-top: 90px;
+				float: left;
+				margin-left: 40px;
+			}
+			#ECha_9{
+				width: 200px;
+				height: 200px;
+				margin-top: 90px;
+				float: left;
+			}
+			#ECha_10{
+				width: 400px;
+				height: 350px;
+				margin: 0 auto;
+				margin-top: -30px;
+			}
+			#ECha_11,#ECha_17{
+				width: 100%;
+				height: 400px;
+				margin: 0 auto;
+				margin-top: 20px;
+			}
+			#ECha_13{
+				width: 250px;
+				height: 400px;
+				margin: 0 auto;
+				margin-top: 25px;
+			}
+			#ECha_14{
+				width: 100%;
+				height: 430px;
+			}
+			#ECha_15,#ECha_16{
+				width: 96%;
+				height: 350px;
+				margin: 0 auto;
+			}
+			/*分页*/
+			#paging{
+				float: left;
+				margin-top: 20px;
+			}
+			.tablelist {
+				width: 100%;
+				box-sizing: border-box!important;
+			}
+			.echarts-list .listone,footer {
+			    box-sizing: border-box!important;
+			}
+			header .header-logo {
+			    height: 100px;
+			    width:365px;
+			    margin: 0 auto;
+			}
+			header .header-logo h1 span {
+			    color: #feffff;
+			    font-size: 26px;
+			    font-family: PingFangMedium;
+			    font-weight: normal;
+			    line-height: 80px;
+			    padding-left: 10px;
+			}
+			header .goPage a{
+				color: #03AFB8;
+				float: right;
+				font-weight: 600;
+				font-size: 16px;
+			    margin-top: -70px;
+			    margin-right: 50px; 
+			}
+			header .goPage a:hover{
+				color: #eee;
+			}
+		</style>
+	</head>
+	<body>
+		<!--网页头部-->
+		<div class="header-top">
+			<header>
+<!-- 				<div class="header-left"> -->
+<!-- 					<img src="./img/logo.png" /> -->
+<!-- 				</div> -->
+				<div class="header-logo">
+					<h1>
+						<img src="./img/logo.png" /><span>曙光智慧校园大数据系统</span>
+					</h1>
+				</div>
+				<div class="goPage"><a href="librarybehavior.html">→&nbsp;图书馆分析</a></div>
+			</header>
+		</div>
+		<div class="main">
+			<div class="main-right">
+				<div class="top-list canteen-top-list">
+					<ul>
+						<li>
+							<select name="college" id="college" autocomplete="off">
+								<option value="" disabled selected>学院</option>
+							</select>
+						</li>
+						<li>
+							<select name="zhuanye" id="major" autocomplete="off">
+								<option value="" disabled selected>专业</option>
+							</select>
+						</li>
+						<li>
+							<select name="end-time" id="grade" autocomplete="off">
+								<option value="" disabled selected>年级</option>
+							</select>
+						</li>
+						<li class="result">
+							<a href="javascript:;" id="submit" ><i class="search"></i>查询结果</a>
+							</select>
+						</li>
+					</ul>
+				</div>
+				<div class="top-list">
+					<ul>
+						<li><img src="./img/zxxss.png" /><span>学生总数</span><span id="allnum">----</span><img class="xian" src="./img/fgx.png"/></li>
+						<li><img src="./img/nss.png" /><span>男数</span><span id="boynum">----</span><img class="xian" src="./img/fgx.png"/></li>
+						<li><img src="./img/nvs.png" /><span>女数</span><span id="girlnum">----</span></li>
+					</ul>
+				</div>
+				<h1>学生分布</h1>
+				<div class="echarts-list">
+					<ul>
+						<li>
+							<h2>学生分布</h2>
+							<div id="ECha_1"></div>			
+						</li>
+						<li>
+							<h2>政治面貌</h2>
+							<div id="ECha_2"></div>		
+						</li>
+						<li>
+							<h2>少数民族TOP10</h2>
+							<div id="ECha_3"></div>		
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+				<h1>生源地分布</h1>
+				<div class="echarts-list">
+					<div class="listtwo">
+						<ul>
+							<li>
+								<div id="ECha_4"></div>
+							</li>
+							<li>
+								<h2>生源地TOP10</h2>
+								<div id="ECha_5"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<h1>学生获奖</h1>
+				<div class="echarts-list">
+					<div class="listtwo">
+						<ul>
+							<li>
+								<h2>获奖TOP10</h2>
+								<div id="ECha_15"></div>
+							</li>
+							<li>
+								<h2>学生获奖</h2>
+								<div id="ECha_16"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- <h1>门禁通行</h1>
+				<div class="echarts-list">
+					<div class="listone">
+						<div id="ECha_17"></div>
+					</div>
+				</div> -->
+				<!-- <h1>学生就餐习惯分析</h1>
+				<div class="echarts-list">
+					<div class="listone">
+						<div id="ECha_6"></div>
+						<div id="ECha_7"></div>
+					</div>
+				</div> -->
+				<h1>一卡通平均每月消费排名</h1>
+				<div class="echarts-list">
+					<div class="tablelist manybooks">
+						<table class="">
+						    <colgroup>
+						      <col width="">
+						      <col width="">
+						      <col width="">
+						      <col width="">
+						      <col width="">
+						      <col width="">
+						      <col width="">
+						      <col width="">
+						    </colgroup>
+						    <thead>
+						      <tr>
+						        <th>排名</th>
+						        <th>姓名</th>
+						        <th>学号</th>
+						        <th>性别</th>
+						        <th>学院</th>
+						        <th>专业</th>
+						        <th>班级</th>
+						        <th>月均刷卡消费</th>
+						      </tr> 
+						    </thead>
+						    <tbody id="getList">
+						     <!--  <tr>
+						        <td>154263</td>
+						        <td>《唐诗三百首》精编版</td>
+						        <td>5</td>
+						        <td>14</td>
+						        <td>25</td>
+						        <td>0</td>
+						        <td>81</td>
+						        <td><img src="../img/lxq.png"/></td>
+						      </tr> -->
+						    </tbody>
+						  </table>
+						  <!--分页-->
+						  <div id="paging"></div>
+						  <div class="clear"></div>
+					</div>
+				</div>
+				
+				<!-- <h1>图书馆借阅情况分析</h1>
+				<div class="echarts-list">
+					<div class="listbilie">
+						<ul>
+							<li>
+								<div id="ECha_11"></div>
+							</li>
+							<li>
+								<h2>上网时段分布</h2>
+								<div id="ECha_13"></div>
+							</li>
+						</ul>
+					</div>
+				</div> -->
+				<h1>成绩分布</h1>
+				<div class="echarts-list">
+					<div class="listone">
+						<div id="ECha_14"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+				<footer>版权所有 © 2018 浙江曙光信息技术有限公司</footer>
+			</div>
+		</div>
+		<!--少数民族TOP10弹窗详情-->
+		<div class="stu_popup">
+			<section>
+				<h1>少数民族TOP10</h1>
+				<div class="popup_table">
+					<div class="popup_table_list">
+						<table class="">
+						    <colgroup>
+						      <col width="100">
+						      <col width="70">
+						      <col width="70">
+						      <col width="150">
+						    </colgroup>
+						    <thead>
+						      <tr>
+						        <th>学号</th>
+						        <th>姓名</th>
+						        <th>性别</th>
+						        <th>班级</th>
+						      </tr> 
+						    </thead>
+						    <tbody>
+						      <tr>
+						        <td>20141508121</td>
+						        <td>张三</td>
+						        <td>男</td>
+						        <td>13影视摄影与制作(电视节目制作)1班</td>
+						      </tr>
+						      <tr>
+						        <td>20141508121</td>
+						        <td>张三</td>
+						        <td>男</td>
+						        <td>13影视摄影与制作(电视节目制作)1班</td>
+						      </tr>
+						      <tr>
+						        <td>20141508121</td>
+						        <td>张三</td>
+						        <td>男</td>
+						        <td>13影视摄影与制作(电视节目制作)1班</td>
+						      </tr>
+						      <tr>
+						        <td>20141508121</td>
+						        <td>张三</td>
+						        <td>男</td>
+						        <td>13影视摄影与制作(电视节目制作)1班</td>
+						      </tr>
+						      <tr>
+						        <td>20141508121</td>
+						        <td>张三</td>
+						        <td>男</td>
+						        <td>13影视摄影与制作(电视节目制作)1班</td>
+						      </tr>
+						      <tr>
+						        <td>20141508121</td>
+						        <td>张三</td>
+						        <td>男</td>
+						        <td>13影视摄影与制作(电视节目制作)1班</td>
+						      </tr>
+						    </tbody>
+						  </table>
+					</div>
+				</div>
+			</section>
+		</div>
+		<script type="text/javascript" src="./js/jquery.min.js" ></script>
+		<script type="text/javascript" src="./js/echarts.js" ></script>
+		<script type="text/javascript" src="./js/basic.js" ></script>
+		<script type="text/javascript" src="../js/layui/layui.js" ></script>
+
+		<script src="./js/china.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			
+			var pageSize = 10;
+			var pageNo = 1;
+
+			//接口请求
+			var ip_addr = getUrl();
+			var colors = ["#f3a67a","#8efcf9","#fe979a","#fc8599","#ffeeba","#07c997","#e7b601","#cc84a9","#68d498","#92b7e3","#feff01","#31fff5","#7cd9a4","#ccb79c","#f3a67a","#e9f017","#0992be","#f16951","#1c4585","#8fafe0","#b1d780","#dfab00"];
+			$(document).ready(function() {
+				var xym = $("#college").val();//学院id
+				var zym = $("#major").val();//专业id
+				var bm = $("#grade").val();//年级id
+
+				getSelectXym();//学院
+				// getSelectZhuanye();//专业
+				// getSelectNianji();//年级
+				getStudentNum(xym,zym,bm);//总数
+				getStudentDist(xym,zym,bm);//学院分布
+				getPoliticsDist(xym,zym,bm);//政治面貌
+				getNationDist(xym,zym,bm);//少数民族TOP10
+				getSYDDist(xym,zym,bm);//生源地分布
+				getSYDTop10Dist(xym,zym,bm);//生源地TOP10
+				getPrizeNumTop10(xym,zym,bm);//获奖TOP10
+				getPrizeDist(xym,zym,bm);//获奖情况
+				getStudentScoreRank(xym,zym,bm);//成绩分布
+				getConsumerList(xym,zym,bm)//一卡通消费排名
+
+			});
+			//点击提交
+			$("#submit").click(function(){
+				var xym = $("#college").val();//学院id
+				var zym = $("#major").val();//专业id
+				var bm = $("#grade").val();//年级id
+				getStudentNum(xym,zym,bm);//总数
+				getStudentDist(xym,zym,bm);//学院分布
+				getPoliticsDist(xym,zym,bm);//政治面貌
+				getNationDist(xym,zym,bm);//少数民族TOP10
+				getSYDDist(xym,zym,bm);//生源地分布
+				getSYDTop10Dist(xym,zym,bm);//生源地TOP10
+				getPrizeNumTop10(xym,zym,bm);//获奖TOP10
+				getPrizeDist(xym,zym,bm);//获奖情况
+				getStudentScoreRank(xym,zym,bm);//成绩分布
+				getConsumerList(xym,zym,bm)//一卡通消费排名	
+			})
+			//获取学院
+			function getSelectXym(){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getSelectXym', 
+					data: {
+						
+					},
+					success: function(data) { 
+						var result = data.result;
+						var innerHTML = '';
+						if(data.success == true) {	
+							for (var i = 0; i < result.length; i++) {
+								innerHTML +='<option class='+ result[i] +' value='+ result[i] +'>'+ result[i] +'</option>';
+	               			};
+							$("#college").append(innerHTML);
+							$("#college").unbind("change").change(function(){
+								var college = $('#college option:selected').attr('class');
+								getSelectZhuanye(college)//专业
+							});
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			};
+			//获取专业
+			function getSelectZhuanye(college){
+				document.getElementById("major").innerHTML = "";
+				$("#major").html('<option value="" disabled selected>专业</option>');
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getSelectZhuanye', 
+					data: {
+						xym:college,
+					},
+					success: function(data) { 
+						var result = data.result;
+						var innerHTML = '';
+						if(data.success == true) {	
+							for (var i = 0; i < result.length; i++) {
+								innerHTML +='<option class='+result[i]+' value='+result[i]+'>'+result[i]+'</option>';
+	               			};
+							$("#major").append(innerHTML);
+							$("#major").unbind("change").change(function(){
+								var major = $('#major option:selected').attr('class');
+								getSelectNianji(college,major)//获取年级
+							});
+							
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			};
+			//获取年级
+			function getSelectNianji(college,major){
+				document.getElementById("grade").innerHTML = "";
+				$("#grade").html('<option value="" disabled selected>年级</option>');
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getSelectNianji', 
+					data: {
+						xym:college,
+						zym:major
+					},
+					success: function(data) { 
+						var result = data.result;
+						var innerHTML = '';
+						if(data.success == true) {	
+							for (var i = 0; i < result.length; i++) {
+								innerHTML +='<option class='+result[i]+' value='+result[i]+'>'+result[i]+'</option>';
+	               			};
+							$("#grade").append(innerHTML);
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			};
+			//获取总数
+			function getStudentNum(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getStudentNum', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						var innerHTML = '';
+						if(data.success == true) {
+							$("#allnum").text(result.zongshu);
+							$("#boynum").text(result.male);
+							$("#girlnum").text(result.female);
+							
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			};
+			//学院分布
+			function getStudentDist(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getStudentDist', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						var legendArr=[],seriesArr=[];
+						if(data.success == true) {
+							for(var i = 0; i < result.length; i++){
+								legendArr.push(result[i].name);
+								seriesArr.push({
+				                	value:result[i].value,
+				                	itemStyle: {
+										normal: {
+											color: colors[i],
+										}
+									},
+									name:result[i].name
+				                })
+							};
+							var myChart1 = echarts.init(document.getElementById('ECha_1'));
+							option1 = {
+							    tooltip: {
+							        trigger: 'item',
+							        formatter: "{a} <br/>{b}({d}%)"
+							    },
+							    legend: {
+							        data:legendArr,
+					                textStyle:{
+					                	color:"#ffffff"
+					                },
+					                height:"120",
+					                top:"200",
+					                type: 'scroll',
+					                orient: 'vertical',
+							    },
+							    series: [
+							        {
+							            name:'学院分布',
+							            type:'pie',
+							            radius: ['56%', '40%'],
+							            center: ['50%', '30%'],
+							            avoidLabelOverlap: false,
+							            labelLine:{
+							            	normal:{
+							            		show:false
+							            	}
+							            },
+							            label: {
+							                normal: {
+							                    show: false,
+							                }
+							            },
+							            data:seriesArr
+							        }
+							    ]
+							};
+							myChart1.setOption(option1);
+							
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			}
+			//政治面貌
+			function getPoliticsDist(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getPoliticsDist', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						var legendArr=[],seriesArr=[];
+						if(data.success == true) {
+							for(var i = 0; i < result.length; i++){
+								legendArr.push(result[i].name);
+								seriesArr.push({
+				                	value:result[i].value,
+				                	itemStyle: {
+										normal: {
+											color: colors[i],
+										}
+									},
+									name:result[i].name
+				                })
+							};
+							var myChart2 = echarts.init(document.getElementById('ECha_2'));
+							option2 = {
+							    tooltip : {
+							        trigger: 'item',
+							        formatter: "{a} <br/>{b} : {c} ({d}%)"
+							    },
+							    legend: {
+							        data:legendArr,
+					                textStyle:{
+					                	color:"#ffffff"
+					                },
+					                height:"50",
+					                top:"220"
+							    },
+							    series : [
+							        {
+							            name: '政治面貌',
+							            type: 'pie',
+							            radius : '55%',
+							            center: ['50%', '30%'],
+							            labelLine:{
+							            	normal:{
+							            		show:false
+							            	}
+							            },
+							            label: {
+							                normal: {
+							                    show: false,
+							                }
+							            },
+							            data:seriesArr,
+							            itemStyle: {
+							                emphasis: {
+							                    shadowBlur: 10,
+							                    shadowOffsetX: 0,
+							                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+							                }
+							            }
+							        }
+							    ]
+							};
+							myChart2.setOption(option2);
+							
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			}
+			//少数名字TOP10
+			function getNationDist(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getNationDist', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						if(data.success == true) {
+							var myChart3 = echarts.init(document.getElementById('ECha_3'));
+							option3 = {
+							    tooltip : {
+							        trigger: 'axis',
+							        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+							            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+							        }
+							    },
+							    grid: {
+							        left: '3%',
+							        right: '4%',
+							        bottom: '3%',
+							        containLabel: true
+							    },
+							    xAxis:  {
+							        type: 'value',
+							        splitLine: {
+									    lineStyle: {
+									        color: ['#222b73']
+									    }
+									},
+									axisLabel:{
+										textStyle: {
+											color:"#dfdfdf"
+										}
+										
+									}
+							    },
+							    yAxis: {
+							        type: 'category',
+							        data: result.categories,
+							        axisLabel:{
+										textStyle: {
+											color:"#dfdfdf"
+										}
+										
+									}
+							    },
+							    series: [
+							        {
+							            name: '生源地TOP10',
+							            type: 'bar',
+							            stack: '总量',
+							            barWidth: '10',
+							            label: {
+							                normal: {
+							                    show: true,
+							                    position: 'right',
+							                    textStyle: {
+							                    	color:'#dfdfdf'
+							                    }			                
+							                }
+							            },
+							            data: result.data,
+							            itemStyle: {
+							                normal: {
+							                    color: new echarts.graphic.LinearGradient(
+							                        1, 0, 0, 0,
+							                        [
+							                            {offset: 0, color: '#02b2d4'},
+							                            {offset: 1, color: '#212f76'}
+							                        ]
+							                    ),
+							                     barBorderRadius: [0, 10, 10, 0]
+							                }
+							            },
+							        }
+							    ]
+							};
+							myChart3.setOption(option3);
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			}
+			//生源地分布
+			function getSYDDist(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getSYDDist', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						var innerHTML = '';
+						if(data.success == true) {
+							var myChart4 = echarts.init(document.getElementById('ECha_4'));
+							var option4 = {
+								tooltip: {},
+								visualMap: {
+									textStyle: {
+										color: '#fff'
+									},
+									min: 0,
+									max: 2000,
+									left: 'left',
+									top: 'bottom',
+				//					text: ['最高销售量', '最低销售量'], // 文本，默认为数值文本
+									calculable: true,
+									color: ['#0000F8', '#33F4FA']
+								},
+								series: [{
+									name: '',
+									type: 'map',
+									mapType: 'china',
+									roam: false,
+									itemStyle: {
+										emphasis: {
+											areaColor: 'blue'
+										}
+									},
+									label: {
+										normal: {
+											show: false
+										},
+										emphasis: {
+											show: false
+										}
+									},
+									data: result
+								}]
+							};
+							myChart4.setOption(option4);
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			}
+			//生源地TOP10
+			function getSYDTop10Dist(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getSYDTop10Dist', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						if(data.success == true) {
+							var myChart5 = echarts.init(document.getElementById('ECha_5'));
+							option5 = {
+							    tooltip : {
+							        trigger: 'axis',
+							        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+							            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+							        }
+							    },
+							    grid: {
+							        left: '3%',
+							        right: '4%',
+							        bottom: '0%',
+							        containLabel: true
+							    },
+							    xAxis:  {
+							        type: 'value',
+							        splitLine: {
+									    lineStyle: {
+									        color: ['#222b73']
+									    }
+									},
+									axisLabel:{
+										textStyle: {
+											color:"#dfdfdf"
+										}
+										
+									}
+							    },
+							    yAxis: {
+							        type: 'category',
+							        data: result.categories,
+							        axisLabel:{
+										textStyle: {
+											color:"#dfdfdf"
+										}
+										
+									}
+							    },
+							    series: [
+							        {
+							            name: '生源地TOP10',
+							            type: 'bar',
+							            barWidth: '15',
+							            stack: '总量',
+							            
+							            label: {
+							                normal: {
+							                    show: true,
+							                    position: 'right',
+							                    textStyle: {
+							                    	color:'#dfdfdf'
+							                    }			                
+							                }
+							            },
+							            data: result.data,
+							            itemStyle: {
+							                normal: {
+							                    color: new echarts.graphic.LinearGradient(
+							                        1, 0, 0, 0,
+							                        [
+							                            {offset: 0, color: '#6092fe'},
+							                            {offset: 1, color: '#23459e'}
+							                        ]
+							                    ),
+							                     barBorderRadius: [0, 10, 10, 0]
+							                }
+							            },
+							        }
+							    ]
+							};
+							myChart5.setOption(option5);
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			}
+			//获奖TOP10
+			function getPrizeNumTop10(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getPrizeNumTop10', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						if(data.success == true) {
+							var myChart15 = echarts.init(document.getElementById('ECha_15'));
+							option15 = {
+							    tooltip : {
+							        trigger: 'axis',
+							        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+							            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+							        }
+							    },
+							    grid: {
+							        left: '3%',
+							        right: '4%',
+							        top:"5%",
+							        // bottom: '0%',
+							        containLabel: true
+							    },
+							    xAxis:  {
+							        type: 'value',
+							        splitLine: {
+									    lineStyle: {
+									        color: ['#222b73']
+									    }
+									},
+									axisLabel:{
+										textStyle: {
+											color:"#dfdfdf"
+										}
+										
+									}
+							    },
+							    yAxis: {
+							        type: 'category',
+							        data: result.categories,
+							        axisLabel:{
+										textStyle: {
+											color:"#dfdfdf"
+										}
+										
+									}
+							    },
+							    series: [
+							        {
+							            name: '获奖TOP10',
+							            type: 'bar',
+							            barWidth: '15',
+							            stack: '总量',
+							            
+							            label: {
+							                normal: {
+							                    show: true,
+							                    position: 'right',
+							                    textStyle: {
+							                    	color:'#dfdfdf'
+							                    }			                
+							                }
+							            },
+							            data: result.data,
+							            itemStyle: {
+							                normal: {
+							                    color: new echarts.graphic.LinearGradient(
+							                        1, 0, 0, 0,
+							                        [
+							                            {offset: 0, color: '#6092fe'},
+							                            {offset: 1, color: '#23459e'}
+							                        ]
+							                    ),
+							                     barBorderRadius: [0, 10, 10, 0]
+							                }
+							            },
+							        }
+							    ]
+							};
+							myChart15.setOption(option15);
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			}
+			//获奖情况
+			function getPrizeDist(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getPrizeDist', 
+					data: {
+						xym:xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						var legendArr=[],seriesArr=[];
+						if(data.success == true) {
+							for(var i = 0; i < result.length; i++){
+								legendArr.push(result[i].name);
+								seriesArr.push({
+				                	value:result[i].value,
+				                	itemStyle: {
+										normal: {
+											color: colors[i],
+										}
+									},
+									name:result[i].name
+				                })
+							};
+							var myChart16 = echarts.init(document.getElementById('ECha_16'));
+							option16 = {
+							    tooltip : {
+							        trigger: 'item',
+							        formatter: "{a} <br/>{b} : {c} ({d}%)"
+							    },
+							    legend: {
+							        orient: 'vertical',
+							        data:legendArr,
+					                textStyle:{
+					                	color:"#dfdfdf"
+					                },
+					                height:"50",
+					                top:"280"
+							    },
+							    series : [
+							        {
+							            name: '政治面貌',
+							            type: 'pie',
+							            radius : '55%',
+							            center: ['50%', '35%'],
+							            labelLine:{
+							            	normal:{
+							            		show:false
+							            	}
+							            },
+							            label: {
+							                normal: {
+							                    show: false,
+							                }
+							            },
+							            data:seriesArr,
+							            itemStyle: {
+							                emphasis: {
+							                    shadowBlur: 10,
+							                    shadowOffsetX: 0,
+							                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+							                }
+							            }
+							        }
+							    ]
+							};
+							myChart16.setOption(option16);
+							
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+			}
+			
+			
+			//获取列表
+			function getConsumerList(xym,zym,bm){
+				document.getElementById("getList").innerHTML = "";
+				layui.use('laypage', function(){
+					var laypage = layui.laypage
+					,layer = layui.layer;
+					
+					$.ajax({
+						type: 'post',
+						dataType: 'json', 
+						url: ip_addr + 'student/getConsumerList',  
+						data: {
+							xym: xym,
+							zym:zym,
+							bm:bm,
+							pageNum:10,
+							pageNo:pageNo
+						},
+						success: function(data) { 
+							var result = data.result.data;
+							var innerHTML = '';
+							if(data.success == true) {	
+								for (var i = 0; i < result.length; i++) {
+									innerHTML +='<tr>';
+							        innerHTML +='<td>'+result[i].NUMBER+'</td>';
+							        innerHTML +='<td>'+result[i].XH+'</td>';
+							        innerHTML +='<td>'+result[i].XM+'</td>';
+							        innerHTML +='<td>'+result[i].XB+'</td>';
+							        innerHTML +='<td>'+result[i].XYM+'</td>';
+							        innerHTML +='<td>'+result[i].ZYM+'</td>';
+							        innerHTML +='<td>'+result[i].BM+'</td>';
+							        innerHTML +='<td>'+result[i].AVGCONSUMER+'</td>';
+							     	innerHTML +='</tr>';
+							     	
+		               			};	
+		               			$("#getList").append(innerHTML);
+								  //分页
+								  laypage.render({
+								    elem: 'paging'
+								    ,curr: pageNo
+								    ,limit:pageSize
+								    ,count: data.result.count 
+								    ,layout: ['count', 'prev', 'page', 'next']
+								    ,jump: function(obj,first) { //触发分页后的回调
+											if(!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
+												pageNo = obj.curr;
+												getConsumerList(xym,zym,bm)
+												
+											}
+										}
+								  });
+								
+							} else{
+								alert(data.msg)
+							}
+						}
+					});
+					
+				});
+			};
+			//成绩分布
+			function getStudentScoreRank(xym,zym,bm){
+				$.ajax({
+					type: 'post',
+					dataType: 'json', 
+					url: ip_addr + 'student/getStudentScoreRank', 
+					data: {
+						xym: xym,
+						zym:zym,
+						bm:bm
+					},
+					success: function(data) { 
+						var result = data.result;
+						var lists = data.result.data
+						var legendArr=[],seriseArr=[];
+						if(data.success == true) {	
+							for(var i = 0; i < lists.length; i++){
+								legendArr.push(lists[i].name);
+								seriseArr.push({
+									name: lists[i].name,
+									type: 'bar',
+									stack: '总量',
+									label: {
+										normal: {
+											show: false,
+											position: 'inside',
+										}
+									},
+									data: lists[i].data,
+									itemStyle: {
+										normal: {
+											color: colors[i],
+										}
+									}
+								})
+							}
+							var myChart14 = echarts.init(document.getElementById('ECha_14'));
+							option14 = {
+								tooltip: {
+									trigger: 'axis',
+									axisPointer: { // 坐标轴指示器，坐标轴触发有效
+										type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+									}
+								},
+								legend: {
+									// orient: 'vertical',
+									data: legendArr,
+									textStyle: {
+										color: "#ffffff"
+									},
+									width:'1200',
+									height: "50",
+									top: "360"
+								},
+								grid: {
+									left: '3%',
+									right: '4%',
+									top:'8%',
+									bottom: '20%',
+									containLabel: true
+								},
+								xAxis: {
+									type: 'value',
+									splitLine: {
+										lineStyle: {
+											color: ['#222b73']
+										}
+									},
+									axisLabel: {
+										textStyle: {
+											color: "#dfdfdf"
+										}
+
+									}
+								},
+								yAxis: {
+									type: 'category',
+									data: result.categories,
+									axisLabel: {
+										textStyle: {
+											color: "#dfdfdf"
+										}
+
+									}
+								},
+								series: seriseArr
+							};
+							myChart14.setOption(option14);
+							
+						} else{
+							alert(data.msg)
+						}
+					}
+				});
+				
+			}
+			
+			
+			function getNotneed(){
+				//学生就餐习惯分析
+				var myChart6 = echarts.init(document.getElementById('ECha_6'));
+				var dataTime = ['06:00~07:00', '07:00~08:00', '08:00~09:00', '10:30~11:30', '11:30~12:30', '12:30~13:30', '16:00~17:00', '17:00~18:00', '18:00~19:00', 'other'];
+				var dataName3 = ['桐乡食堂', 'A18食堂', 'A19食堂2'];
+				var dataColor3 = ['#5ab1ef', '#ffb980', '#d87a80'];
+				var option6 = {
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: { // 坐标轴指示器，坐标轴触发有效
+							type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					legend: {
+						data: dataName3,
+						textStyle: {
+							color: '#dfdfdf',
+							fontSize: 14
+						},
+						top: 30,
+						itemWidth: 12,
+						itemHeight: 12,
+					},
+					grid: {
+						left: '3%',
+						right: '4%',
+						top:"25%",
+						bottom: '15%',
+						containLabel: true
+					},
+					yAxis: {
+						name: '就餐人数',
+						type: 'value',
+						nameLocation: 'middle',
+						nameTextStyle: {
+							color: "#fff",
+						},
+						nameGap: 50,
+						min: 0,
+						max: 12.5,
+						interval: 2.5,
+						axisLabel: {
+							formatter: '{value}k',
+							textStyle: {
+								color: '#dfdfdf',
+								fontSize: 14
+							},
+						},
+						axisLine: {
+							show: false
+						},
+						splitLine: {
+							show: true,
+							lineStyle: {
+								color: "#222b73",
+								type: 'solid'
+							}
+						}
+					},
+					xAxis: {
+						type: 'category',
+						data: dataTime,
+						axisLabel: {
+							formatter: '{value}',
+							textStyle: {
+								color: '#dfdfdf',
+								fontSize: 14
+							},
+							rotate: 30,
+							interval: 0,
+							margin: 30
+						},
+						axisTick: {
+							inside: false,
+							length: 15,
+							lineStyle: {
+								color: '#222b73'
+							}
+						}
+					},
+					series: [{
+							name: dataName3[0],
+							type: 'bar',
+							stack: '总量',
+							barWidth: 40,
+							label: {
+								normal: {
+									show: false,
+									position: 'insideRight'
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: dataColor3[0]
+								},
+								emphasis: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							},
+							data: [3, 2, 1, 3, 4, 1, 4, 1, 1, 1]
+						},
+						{
+							name: dataName3[1],
+							type: 'bar',
+							stack: '总量',
+							barWidth: 40,
+							label: {
+								normal: {
+									show: false,
+									position: 'insideRight'
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: dataColor3[1]
+								},
+								emphasis: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							},
+							data: [3, 2, 1, 2, 1, 1, 2, 1, 1, 1]
+						},
+						{
+							name: dataName3[2],
+							type: 'bar',
+							stack: '总量',
+							barWidth: 40,
+							label: {
+								normal: {
+									show: false,
+									position: 'insideRight'
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: dataColor3[2]
+								},
+								emphasis: {
+									shadowBlur: 10,
+									shadowOffsetX: 0,
+									shadowColor: 'rgba(0, 0, 0, 0.5)'
+								}
+							},
+							data: [3, 2, 1, 1, 2, 1, 1, 1, 1, 1]
+						}
+					],
+					dataZoom: {
+						type: 'inside',
+						filterMode: 'filter'
+					}
+				};
+				myChart6.setOption(option6);
+				
+				var myChart7 = echarts.init(document.getElementById('ECha_7'));
+				var dataX7 = [335, 310, 234, 135];
+				var dataName7 = ['0餐：' + dataX7[0] + '人', '1餐：' + dataX7[1] + '人', '2餐：' + dataX7[2] + '人', '3餐：' + dataX7[3] + '人'];
+				var dataColor7 = ['#5ab1ef', '#b863fa', '#ffb980', '#d87a80'];
+				var sData7 = [];
+				for(var i = 0; i < dataName7.length; i++) {
+					sData7.push({
+						value: dataX7[i],
+						name: dataName7[i],
+						itemStyle: {
+							normal: {
+								color: dataColor7[i]
+							}
+						}
+					});
+				}
+				var option7 = {
+					tooltip: {
+						trigger: 'item',
+						formatter: "{a} <br/>{b} : {c} ({d}%)"
+					},
+					legend: {
+						orient: 'vertical',
+						left: 'left',
+						data: dataName7,
+						textStyle: {
+							color: '#dfdfdf',
+							fontSize: 14
+						},
+						left: '50%',
+						top: "38%",
+						width: 400,
+						height: 60,
+						itemGap: 30
+					},
+					series: [{
+						name: '餐数',
+						type: 'pie',
+						radius: '65%',
+						center: ['30%', '50%'],
+						data: sData7,
+						itemStyle: {
+							emphasis: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						},
+						label: {
+							normal: {
+								show: false
+							},
+							emphasis: {
+								show: true
+							}
+						}
+					}]
+
+				};
+				myChart7.setOption(option7);
+				
+				
+				
+				
+				//图书馆借阅情况分析
+				var myChart11 = echarts.init(document.getElementById('ECha_11'));
+				option11 = {
+					 tooltip: {
+				        trigger: 'axis',
+				        axisPointer: {
+				            type: 'cross',
+				            crossStyle: {
+				                color: '#999'
+				            }
+				        }
+				    },
+				    legend: {
+				        data:['借阅次数','平均借阅时长'],
+				        textStyle:{
+				        	color:'#dfdfdf'
+				        }
+				    },
+				    xAxis: [
+				        {
+				            type: 'category',
+				            data: ['2017-01','2017-02','2017-03','2017-04','2017-05','2017-06','2017-07','2017-08','2017-09','2017-10','2017-11','2017-12'],
+				            axisPointer: {
+				                type: 'shadow'
+				            },
+				            splitLine: {
+							    lineStyle: {
+							        color: ['#222b73']
+							    }
+							},
+							axisLabel:{
+								interval: 0,
+	             				rotate: 20,
+								textStyle: {
+									color:"#dfdfdf"
+								}
+							},
+					    }
+				    ],
+				    yAxis: [
+				        {
+				            type: 'value',
+				            name: '借阅次数',
+				            min: 0,
+				            max: 250,
+				            interval: 50,
+				            nameTextStyle:{
+				              color:"#dfdfdf",
+				            },
+				            axisLabel: {
+				                formatter: '{value}',
+				                textStyle: {
+									color:"#dfdfdf"
+								}
+				            },
+				            splitLine: {
+							    lineStyle: {
+							        color: ['#222b73']
+							    }
+							}
+				        },
+				        {
+				            type: 'value',
+				            name: '平均借阅时长',
+				            min: 0,
+				            max: 25,
+				            interval: 5,
+				            nameTextStyle:{
+				              color:"#dfdfdf",
+				            },
+				            axisLabel: {
+				                formatter: '{value}',
+				                textStyle: {
+									color:"#dfdfdf"
+								}
+				            },
+				            splitLine: {
+							    lineStyle: {
+							        color: ['#222b73']
+							    }
+							}
+				        }
+				    ],
+				    series: [
+				        {
+				            name:'借阅次数',
+				            type:'bar',
+				            barWidth: '10',
+				            data:[70, 20, 80, 100, 90, 70, 88,68, 55, 48, 120, 110],
+				            itemStyle: {
+				                normal: {
+				                    color: new echarts.graphic.LinearGradient(
+				                        0, 0, 0, 1,
+				                        [
+				                            {offset: 0, color: '#6093fe'},
+				                            {offset: 1, color: '#2547a0'}
+				                        ]
+				                    ),
+				                    
+				                }
+				            },
+				        },
+				        
+				        {
+				            name:'平均借阅时长',
+				            type:'line',
+				            data:[100, 99, 88, 110, 60, 110, 50,70, 68, 77, 90, 100],
+			            	itemStyle: {
+			            		normal: {
+			            			color:'#61e1e4'
+			            		}
+			            	},
+			            	lineStyle: {
+			            		normal: {
+			            			color:'#61e1e4'
+			            		}
+			            	}
+				            
+				        }
+				    ]
+				};
+				myChart11.setOption(option11);
+				
+				//上网时段分析
+				var myChart13 = echarts.init(document.getElementById('ECha_13'));
+				option13 = {
+				    tooltip : {
+				        trigger: 'item',
+				        formatter: "{a} <br/>{b} : {c} ({d}%)"
+				    },
+				    legend: {
+				        orient: 'vertical',
+				        data:['共青团员','党员','预备党员','群众','其他'],
+		                textStyle:{
+		                	color:"#dfdfdf"
+		                },
+		                height:"50",
+		                top:"220"
+				    },
+				    series : [
+				        {
+				            name: '政治面貌',
+				            type: 'pie',
+				            radius : '55%',
+				            center: ['50%', '30%'],
+				            labelLine:{
+				            	normal:{
+				            		show:false
+				            	}
+				            },
+				            label: {
+				                normal: {
+				                    show: false,
+				                }
+				            },
+				            data:[
+				                {
+				                	value:335,
+				                	itemStyle: {
+										normal: {
+											color: '#b4a2de',
+										}
+									},
+									name:'共青团员'
+				                },
+				                {
+				                	value:310,
+				                	itemStyle: {
+										normal: {
+											color: '#5ab5ef',
+										}
+									},
+									name:'党员'
+				                },
+				                {
+				                	value:234,
+				                	itemStyle: {
+										normal: {
+											color: '#ffb672',
+										}
+									},
+									name:'预备党员'
+				                },
+				                {
+				                	value:135,
+				                	itemStyle: {
+										normal: {
+											color: '#6ed2e9',
+										}
+									},
+									name:'群众'
+				                
+				                },
+				                {
+				                	value:1548,
+				                	itemStyle: {
+										normal: {
+											color: '#2ec9c5',
+										}
+									},
+									name:'其他'
+				                }
+				            ],
+				            itemStyle: {
+				                emphasis: {
+				                    shadowBlur: 10,
+				                    shadowOffsetX: 0,
+				                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+				                }
+				            }
+				        }
+				    ]
+				};
+				myChart13.setOption(option13);
+				var myChart17 = echarts.init(document.getElementById('ECha_17'));
+				option17 = {
+				    
+				    tooltip: {
+				        trigger: 'item',
+				        axisPointer: {
+				            type: 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '15%',
+				        right: '10%',
+				    },
+				    xAxis: {
+						type: 'category',
+				        data: ['Bottom','Low','Middle','High','Top'],
+						splitLine: {
+							lineStyle: {
+								color: ['#222b73']
+							}
+						},
+						axisLabel: {
+							textStyle: {
+								color: "#dfdfdf"
+							}
+
+						}
+					},
+				   
+				    
+				    yAxis: {
+				        type: 'value',
+				 		name:"人数",
+				        nameTextStyle: {
+				            color: '#dfdfdf',
+				            fontSize: 14,
+				        },
+				        axisLabel: {
+				            formatter: '{value} CNY/㎡',
+				            textStyle: {
+								color: "#dfdfdf"
+							}
+				        },
+				       axisTick: {
+				            show: false,
+				        },
+				        axisLine: {
+				            lineStyle: {
+				                // color: '#3259B8',
+				            }},
+				        splitLine: {
+				            lineStyle: {
+				                color: ['#222b73']
+				            },
+				        }
+				        
+				    },
+				    series: [{
+				            name: 'boxplot',
+				            type: 'boxplot',
+				            data: [
+				      			[19747,50024,64617,86808,159949],
+				   				[23635,46878,58095,84877,158312],
+								[21543,47623,61315,85947,159978],
+								[18679,46646,59842,84798,159980],
+								[15202,43073,55168,80136,159825]
+							],
+				            itemStyle: {
+				                normal:{
+				                    borderColor: {
+				                    type: 'linear',
+				                    x: 0,
+				                    y: 0,
+				                    x2: 0,
+				                    y2: 1,
+				                    colorStops: [{
+				                        offset: 0,
+				                        color: '#F02FC2' // 0% 处的颜色
+				                    }, {
+				                        offset: 1,
+				                        color: '#3EACE5' // 100% 处的颜色
+				                    }],
+				                    globalCoord: false // 缺省为 false
+				                },
+				                borderWidth:2,
+				                color: {
+				                    type: 'linear',
+				                    x: 0,
+				                    y: 0,
+				                    x2: 0,
+				                    y2: 1,
+				                    colorStops: [{
+				                        offset: 0,
+				                        color: 'rgba(240,47,194,0.8)'  // 0% 处的颜色
+				                    }, {
+				                        offset: 1,
+				                        color: 'rgba(62,172,299,0.8)' // 100% 处的颜色
+				                    }],
+				                    globalCoord: false // 缺省为 false
+				                },
+				            }
+				            },
+				            tooltip: {
+				                formatter: function(param) {
+				                    return [
+
+				                        '最大值: ' + param.data[4] + ' CNY/㎡' ,
+				                        '3/4中位数: ' + param.data[3] + ' CNY/㎡',
+				                        '平均值: ' + param.data[2] + ' CNY/㎡',
+				                        '1/4中位数: ' + param.data[1] + ' CNY/㎡',
+				                        '最小值: ' + param.data[0] + ' CNY/㎡'
+				                    ].join('<br/>')
+				                }
+				            }
+				        },
+
+				    ]
+				};
+				myChart17.setOption(option17);
+			}
+			
+		</script>
+	</body>
+</html>
